@@ -22,9 +22,9 @@ Sub monitoramento()
     
     
     ' aqui ta salvando na matriz, pra depois filtrar
-    i = 0 'contador para ver quantos produtos estão a baixo de 50
+    i = 0 'contador para ver quantos produtos estÃ£o a baixo de 50
     
-    ' faz as verificações a ser monitoradas e alimenta uma matriz
+    ' faz as verificaÃ§Ãµes a ser monitoradas e alimenta uma matriz
     For n = 2 To totalEstoque
         data = DateDiff("d", Date, planilhaEstoque.Cells(n, "E").Value)
         'aqui eu verifico se o produto ta com menos de 15% (nao vou deixar um valor fixo)
@@ -36,8 +36,8 @@ Sub monitoramento()
         End If
     Next n
     
-    ' reseta o padrão da planilha antes de receber as novas informações
-    ' e transfere as informações que estão na matriz
+    ' reseta o padrÃ£o da planilha antes de receber as novas informaÃ§Ãµes
+    ' e transfere as informaÃ§Ãµes que estÃ£o na matriz
     If i > 0 Then
         linhaPlan = planilhaMonitoramento.Cells(planilhaMonitoramento.Rows.Count, 1).End(xlUp).Row + 1
         'limpa a planilha antes do prox "cadastro" digamos
@@ -57,7 +57,7 @@ Sub monitoramento()
         Next i
         
     Else
-        MsgBox "Não há produtos com estoque abaixo de 50 ou com data inferior a 50 dias."
+        MsgBox "NÃ£o hÃ¡ produtos com estoque abaixo de 50 ou com data inferior a 50 dias."
         
         linhaPlan = planilhaMonitoramento.Cells(planilhaMonitoramento.Rows.Count, 1).End(xlUp).Row + 1
         planilhaMonitoramento.Range("A2:I" & linhaPlan).ClearContents
@@ -78,7 +78,7 @@ Sub monitoramento()
 
 End Sub
 
-' Faz as verificações para e coloca uma cor em cadas tipo de filtro
+' Faz as verificaÃ§Ãµes para e coloca uma cor em cadas tipo de filtro
 
 Sub colorir()
     Dim pm As Worksheet
@@ -93,6 +93,7 @@ Sub colorir()
         'Debug.Print data
         If pm.Cells(i, "I").Value <= (pm.Cells(i, "D").Value * 0.2) And data < 30 Then
             pm.Range(pm.Cells(i, 1), pm.Cells(i, ultimaColuna)).Interior.Color = vbRed
+            pm.Range(pm.Cells(i, 1), pm.Cells(i, ultimaColuna)).Font.Color = vbBlack
         
         ElseIf data < 0 Then
             pm.Range(pm.Cells(i, 1), pm.Cells(i, ultimaColuna)).Interior.Color = vbBlack
@@ -100,13 +101,16 @@ Sub colorir()
         
         ElseIf data < 30 Then
             pm.Range(pm.Cells(i, 1), pm.Cells(i, ultimaColuna)).Interior.Color = vbYellow
+            pm.Range(pm.Cells(i, 1), pm.Cells(i, ultimaColuna)).Font.Color = vbBlack
             
         ElseIf pm.Cells(i, "I").Value <= (pm.Cells(i, "D").Value * 0.2) Then
             pm.Range(pm.Cells(i, 1), pm.Cells(i, ultimaColuna)).Interior.Color = RGB(255, 165, 0) ' Cor laranja
+            pm.Range(pm.Cells(i, 1), pm.Cells(i, ultimaColuna)).Font.Color = vbBlack
         End If
     Next i
 
 End Sub
 Sub movimentacao()
-    Worksheets("Movimentação").Activate
+    Worksheets("MovimentaÃ§Ã£o").Activate
 End Sub
+
