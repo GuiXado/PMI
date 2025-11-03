@@ -3,9 +3,9 @@ Option Explicit
 
 Sub Cadastro()
     
-    ' Inicia um vetor com 6 Ìndices (0 a 5)
+    ' Inicia um vetor com 6 √≠ndices (0 a 5)
     Dim vetor(5) As Variant
-    ' Inicia vari·veis paras chamar as planilhas
+    ' Inicia vari√°veis paras chamar as planilhas
     Dim planilhaCadastro As Worksheet
     Dim planilhaEstoque As Worksheet
     Dim colunaCadastro As Range
@@ -19,9 +19,9 @@ Sub Cadastro()
     Worksheets("Cadastro").Activate
     
     
-    ' Faz as validaÁıes
+    ' Faz as valida√ß√µes
     
-    ' Verifica se os campos est„o vazios para o cadastro
+    ' Verifica se os campos est√£o vazios para o cadastro
     For i = 1 To 5
         If planilhaCadastro.Cells(2, i + 1) = "" Then
             MsgBox "Campo em branco!"
@@ -29,46 +29,46 @@ Sub Cadastro()
         End If
     Next i
     
-    ' Aqui È pra verificar o tipo de variavel a ser incluida
+    ' Aqui √© pra verificar o tipo de variavel a ser incluida
     Select Case False
     Case TypeName(Range("A2").Value) = "String"
-        MsgBox "Campo A2 inv·lido! O valor deve ser preenchido como texto."
+        MsgBox "Campo A2 inv√°lido! O valor deve ser preenchido como texto."
         Exit Sub
     Case IsNumeric(Range("C2").Value)
-        MsgBox "Campo C2 inv·lido! O valor deve ser um n˙mero."
+        MsgBox "Campo C2 inv√°lido! O valor deve ser um n√∫mero."
         Exit Sub
     Case TypeName(Range("E2").Value) = "String"
-        MsgBox "Campo E2 inv·lido! O valor deve ser preenchido como texto."
+        MsgBox "Campo E2 inv√°lido! O valor deve ser preenchido como texto."
         Exit Sub
     End Select
 
-    ' validaÁ„o do D2 data, recusa produto vencido ou com data igual a atual
+    ' valida√ß√£o do D2 data, recusa produto vencido ou com data igual a atual
     Dim data%
     data = DateDiff("d", Date, planilhaCadastro.Range("D2").Value)
     If data <= 0 Then
-        MsgBox "Data de validade inv·lida. Verifique e tente novamente." ' & vbCrLf & "Campo D2."
+        MsgBox "Data de validade inv√°lida. Verifique e tente novamente." ' & vbCrLf & "Campo D2."
         Exit Sub
     End If
     
     ' Se validado..
     
-    ' Coloca o conte˙do a ser cadastrado para um vetor
+    ' Coloca o conte√∫do a ser cadastrado para um vetor
     For i = 0 To 5
         vetor(i) = colunaCadastro.Cells(1, i + 1).Value
     Next i
     
-    ' Quando as informaÁıes forem para o vetor vou apagar elas da planilha "cadastro"
+    ' Quando as informa√ß√µes forem para o vetor vou apagar elas da planilha "cadastro"
     planilhaCadastro.Range("A2:F2").ClearContents
     
-    ' Coloca uma linha em branco no inicio para que o vetor n„o cubra nenhuma informaÁ„o
+    ' Coloca uma linha em branco no inicio para que o vetor n√£o cubra nenhuma informa√ß√£o
     planilhaEstoque.Range("A2:I2").Insert
     
-    ' Coloca o conte˙do do vetor para a planilha "estoque"
+    ' Coloca o conte√∫do do vetor para a planilha "estoque"
     For i = 0 To 5
         planilhaEstoque.Cells(2, i + 2).Value = vetor(i)
     Next i
 
-    ' gera um cÛdigo e mostra ele pro usuario, o n∞ gerado sera o maior n˙mero +1
+    ' gera um c√≥digo e mostra ele pro usuario, o n¬∞ gerado sera o maior n√∫mero +1
     n = 3
     maior = planilhaEstoque.Range("A3").Value
 
@@ -79,15 +79,15 @@ Sub Cadastro()
     n = n + 1
     Loop
     planilhaEstoque.Range("A2").Value = maior + 1
-    MsgBox "Produtor cadastrado!" & vbCrLf & "CÛdigo do produto È: " & maior + 1
+    MsgBox "Produtor cadastrado!" & vbCrLf & "C√≥digo do produto √©: " & maior + 1
     
-    ' duplica o estoque cadastrado pro atual, pois esse sera manipilado o outro È sÛ um registro
+    ' duplica o estoque cadastrado pro atual, pois esse sera manipilado o outro √© s√≥ um registro
     planilhaEstoque.Range("I2") = planilhaEstoque.Range("D2")
     
     ' preencher a data do cadastro no estoque
     planilhaEstoque.Range("H2").Value = Date
     
-    ' deixa a cÈlula G2 do estoque maiuscula
+    ' deixa a c√©lula G2 do estoque maiuscula
     planilhaEstoque.Range("F2").Value = UCase(planilhaEstoque.Range("F2").Value)
     planilhaEstoque.Range("G2").Value = UCase(planilhaEstoque.Range("G2").Value)
     planilhaEstoque.Range("B2").Value = UCase(planilhaEstoque.Range("B2").Value)
@@ -101,7 +101,7 @@ Function mov()
     Dim pm As Worksheet, pe As Worksheet
     
     Set pe = ThisWorkbook.Sheets("Estoque")
-    Set pm = ThisWorkbook.Sheets("MovimentaÁ„o")
+    Set pm = ThisWorkbook.Sheets("Movimenta√ß√£o")
     
     pm.Range("A2:E2").Insert
     pm.Range("A2:E2").Interior.Color = RGB(235, 241, 222) 'azul claro
@@ -110,5 +110,6 @@ Function mov()
     pm.Range("C2") = pe.Cells(2, "E")
     pm.Range("D2") = Date
     pm.Range("E2") = pe.Cells(2, "I")
-    pe.Cells(2, "A").EntireRow.Delete
+    'pe.Cells(2, "A").EntireRow.Delete
 End Function
+
